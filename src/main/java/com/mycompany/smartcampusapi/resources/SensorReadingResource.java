@@ -34,4 +34,29 @@ public class SensorReadingResource {
         return DataStore.readings.getOrDefault(sensorId, new ArrayList<>());
     }
     
+    //POST to add a new sensor reading 
+    @POST 
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    
+    public Response addReading(SensorReading reading){ 
+        Sensor sensor = DataStore.sensors.get(sensorId);
+        
+        if (sensor == null){ 
+            return Response.status(Response.Status.NOT_FOUND).build(); 
+            
+        }
+        
+        // Add the reading 
+        
+        DataStore.readings.computeIfAbsent(sensorId, k-> new ArrayList())
+                .add(reading); 
+        
+        sensor.setCurrentValue(reading.getValue()); 
+        
+        return Response.status(Response.Status.CREATED).entity(reading)
+                .build(); 
+    }
+    
+    
 }

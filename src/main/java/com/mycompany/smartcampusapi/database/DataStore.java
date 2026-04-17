@@ -6,7 +6,9 @@ package com.mycompany.smartcampusapi.database;
 
 import com.mycompany.smartcampusapi.model.Room;
 import com.mycompany.smartcampusapi.model.Sensor;
+import com.mycompany.smartcampusapi.model.SensorReading;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,5 +26,5 @@ public class DataStore {
     
     public static Map<String, Sensor> sensors = new HashMap<>();
     
-    
+    public static Map<String, List<SensorReading>> readings = new HashMap<>();
 }

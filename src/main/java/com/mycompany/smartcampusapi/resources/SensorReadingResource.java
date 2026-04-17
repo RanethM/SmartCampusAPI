@@ -26,6 +26,12 @@ public class SensorReadingResource {
         
     }
     
+    //GET sensor readings 
     
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<SensorReading> getReadings(){ 
+        return DataStore.readings.getOrDefault(sensorId, new ArrayList<>());
+    }
     
 }

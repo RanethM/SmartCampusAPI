@@ -40,5 +40,14 @@ public class RoomResource {
                  .build(); 
     }
     
+    // GET a single room according to the room ID 
+    @GET
+    @Path("/{roomId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    
+    public Room getRoom(@PathParam("roomId") String id ){ 
+        return DataStore.rooms.get(id); 
+    }
+    
     
 }

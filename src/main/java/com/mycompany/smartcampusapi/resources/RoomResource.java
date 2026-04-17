@@ -49,5 +49,29 @@ public class RoomResource {
         return DataStore.rooms.get(id); 
     }
     
+    // DELTE room only if the sensor isnt attached to the room 
+    
+    @DELETE
+    @Path("/{roomId}")
+    public Response deleteRoom(@PathParam("roomId") String id){ 
+        Room room = DataStore.rooms.get(id); 
+        
+        //if the room is null then  send a not found status
+        if (room== null){ 
+            return Response.status(Response.Status.NOT_FOUND).build(); 
+            
+        }
+        
+        if (!room.getSensorIds().isEmpty()) {
+            return Response.status(Response.Status.CONFLICT)
+                    .entity("Room has sensors, cannot delete")
+                    .build();
+        }
+        
+        DataStore.rooms.remove(id); 
+        return Response.status(Response.Status.NO_CONTENT).build(); 
+
+    }
+    
     
 }

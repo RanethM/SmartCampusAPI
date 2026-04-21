@@ -5,6 +5,7 @@
 package com.mycompany.smartcampusapi.resources;
 
 import com.mycompany.smartcampusapi.database.DataStore;
+import com.mycompany.smartcampusapi.exception.SensorUnavailableException;
 import com.mycompany.smartcampusapi.model.Sensor;
 import com.mycompany.smartcampusapi.model.SensorReading;
 
@@ -47,6 +48,10 @@ public class SensorReadingResource {
             return Response.status(Response.Status.NOT_FOUND).build(); 
             
         }
+        
+        if (sensor.getStatus().equalsIgnoreCase("MAINTENANCE")) {
+                throw new SensorUnavailableException("Sensor is under maintenance and cannot accept readings");
+          }
         
         // Add the reading 
         

@@ -18,6 +18,7 @@ import java.util.List;
  *
  * @author ranet
  */
+
 public class SensorReadingResource {
     private String sensorId; 
     
@@ -49,7 +50,7 @@ public class SensorReadingResource {
         
         // Add the reading 
         
-        DataStore.readings.computeIfAbsent(sensorId, k-> new ArrayList())
+        DataStore.readings.computeIfAbsent(sensorId, k-> new ArrayList<>())
                 .add(reading); 
         
         sensor.setCurrentValue(reading.getValue()); 

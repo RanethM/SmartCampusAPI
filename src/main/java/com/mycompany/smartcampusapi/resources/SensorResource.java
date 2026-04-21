@@ -5,6 +5,7 @@
 package com.mycompany.smartcampusapi.resources;
 
 import com.mycompany.smartcampusapi.database.DataStore;
+import com.mycompany.smartcampusapi.exception.LinkedResourceNotFoundException;
 import com.mycompany.smartcampusapi.model.Room;
 import com.mycompany.smartcampusapi.model.Sensor;
 import java.util.List;
@@ -53,10 +54,8 @@ public class SensorResource {
     //First we validate 
     Room room = DataStore.rooms.get(sensor.getRoomId()); 
     
-    if (room== null){ 
-        return Response.status(Response.Status.BAD_REQUEST)
-                .entity("Room does not exist")
-                .build(); 
+    if (room == null) {
+        throw new LinkedResourceNotFoundException("Room ID does not exist for this sensor");
     }
     
     // Save the sensor in the DataStore 

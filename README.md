@@ -53,6 +53,13 @@ mvn clean install
 
 GET /api/v1
 
+### Rooms
+
+GET /rooms
+POST /rooms
+GET /rooms/{roomId}
+DELETE /rooms/{roomId}
+
 
 
 

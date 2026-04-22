@@ -47,6 +47,12 @@ mvn clean install
 
 [https://localhost:8080/SmartCampusAPI/api/v1](http://localhost:8080/SmartCampusAPI/api/v1)
 
+## API Endpoints
+
+### Discovery
+
+GET /api/v1
+
 
 
 

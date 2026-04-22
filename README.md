@@ -45,5 +45,9 @@ mvn clean install
 
 6. Access the API at:
 
+[https://localhost:8080/SmartCampusAPI/api/v1](http://localhost:8080/SmartCampusAPI/api/v1)
+
+
+
 
 

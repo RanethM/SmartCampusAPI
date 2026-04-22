@@ -128,3 +128,94 @@ curl -X POST http://localhost:8080/SmartCampusAPI/api/v1/sensors/S1/readings
 -d '{"id":"RD1","timestamp":1710000000000,"value":25.5}'
 
 
+
+
+---
+
+## Error Handling Strategy
+
+The API implements robust error handling using custom exceptions and ExceptionMappers:
+
+| Scenario | Status Code | Explanation |
+|--------|--------|------------|
+| Room has sensors | 409 Conflict | Prevents data inconsistency |
+| Invalid roomId | 422 Unprocessable Entity | Valid request but invalid reference |
+| Sensor in maintenance | 403 Forbidden | State-based restriction |
+| Unexpected error | 500 Internal Server Error | Global safety net |
+
+All errors return structured JSON responses.
+
+---
+
+## Logging (Observability)
+
+A logging filter is implemented using:
+- `ContainerRequestFilter`
+- `ContainerResponseFilter`
+
+Logs include:
+- Incoming HTTP method and URI
+- Outgoing response status
+
+This improves debugging, monitoring, and system observability.
+
+---
+
+## Report Answers
+
+### JAX-RS Lifecycle
+JAX-RS creates a new instance of resource classes per request. This avoids concurrency issues but requires shared data structures to be managed carefully using static collections.
+
+---
+
+### HATEOAS
+Hypermedia allows clients to dynamically discover available endpoints via links in responses, reducing dependency on static documentation.
+
+---
+
+### IDs vs Full Objects
+Returning full objects increases payload size but reduces client-side requests. Returning IDs is lightweight but requires additional calls.
+
+---
+
+### Idempotency of DELETE
+DELETE is idempotent because repeated requests result in the same state (resource removed). Subsequent calls return 404 but do not alter system state.
+
+---
+
+### @Consumes Behaviour
+If a client sends data in an unsupported format, JAX-RS returns HTTP 415 Unsupported Media Type.
+
+---
+
+### QueryParam vs PathParam
+Query parameters are more flexible and suitable for filtering collections, while path parameters are better for identifying specific resources.
+
+---
+
+### Sub-resource Locator Benefits
+Separates concerns by delegating nested resource logic to different classes, improving maintainability and scalability.
+
+---
+
+### Why 422 instead of 404
+422 indicates that the request is valid but contains incorrect data, whereas 404 refers to a missing endpoint.
+
+---
+
+### Security Risk of Stack Traces
+Stack traces expose internal system details such as class names and file paths, which attackers can exploit. Therefore, generic error responses are used.
+
+---
+
+### Logging Filters Advantage
+Filters centralize logging logic, avoiding duplication and improving code maintainability.
+
+---
+
+## Author
+
+Name: <YOUR_NAME>  
+Module: 5COSC022W – Client-Server Architectures
+
+

@@ -78,6 +78,17 @@ GET /rooms/{roomId}
 DELETE /rooms/{roomId}
 
 
+### Sensors
+
+GET /sensors
+GET /sensors?type=...
+POST /sensors
+
+
+### Sensor Readings
+
+GET /sensors/{sensorId}/readings
+POST /sensors/{sensorId}/readings
 
 
 

@@ -47,6 +47,23 @@ mvn clean install
 
 [https://localhost:8080/SmartCampusAPI/api/v1](http://localhost:8080/SmartCampusAPI/api/v1)
 
+
+
+## API Design (REST Principles)
+
+- Resources are modeled as:
+- `/rooms`
+- `/sensors`
+- `/sensors/{id}/readings`
+- Stateless communication between client and server
+- Proper use of HTTP methods (GET, POST, DELETE)
+- Meaningful HTTP status codes
+- JSON-based responses
+
+
+
+
+
 ## API Endpoints
 
 ### Discovery

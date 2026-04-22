@@ -91,4 +91,40 @@ GET /sensors/{sensorId}/readings
 POST /sensors/{sensorId}/readings
 
 
+## Sample curl Commands
+
+### Get all rooms
+
+curl -X GET http://localhost:8080/SmartCampusAPI/api/v1/rooms
+
+
+### Create room
+
+curl -X POST http://localhost:8080/SmartCampusAPI/api/v1/rooms
+
+-H "Content-Type: application/json"
+-d '{"id":"R3","name":"Lecture Hall","capacity":100}'
+
+
+### Create sensor
+
+curl -X POST http://localhost:8080/SmartCampusAPI/api/v1/sensors
+
+-H "Content-Type: application/json"
+-d '{"id":"S1","type":"Temperature","status":"ACTIVE","currentValue":0,"roomId":"R1"}'
+
+
+### Filter sensors
+
+curl -X GET "http://localhost:8080/SmartCampusAPI/api/v1/sensors?type=Temperature
+"
+
+
+### Add sensor reading
+
+curl -X POST http://localhost:8080/SmartCampusAPI/api/v1/sensors/S1/readings
+
+-H "Content-Type: application/json"
+-d '{"id":"RD1","timestamp":1710000000000,"value":25.5}'
+
 
